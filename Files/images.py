@@ -1,42 +1,15 @@
-import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
+import cv2
 
-df = sns.load_dataset('iris')
+# Load the image from the file path
+image = cv2.imread('path_to_your_image.jpg')
 
+# Check if the image was loaded correctly
+if image is None:
+    print("Error: Unable to load image.")
+else:
+    # Display the image in a window
+    cv2.imshow('Loaded Image', image)
 
-print("Basic Information:\n")
-print(df.info())
-print("\nFirst few rows of the dataset:\n")
-print(df.head())
-
-print("\nSummary Statistics:\n")
-print(df.describe())
-
-
-print("\nMissing Values:\n")
-print(df.isnull().sum())
-
-
-print("\nUnivariate Analysis - Histograms:\n")
-df.hist(figsize=(10, 8), bins=20)
-plt.suptitle("Histograms of Iris Features")
-plt.show()
-
-
-print("\nPairplot for feature relationships:\n")
-sns.pairplot(df, hue='species')
-plt.show()
-
-
-print("\nCorrelation Heatmap:\n")
-corr = df.corr()
-sns.heatmap(corr, annot=True, cmap='coolwarm')
-plt.title('Feature Correlation Heatmap')
-plt.show()
-
-
-print("\nBoxplot for Feature Distribution across Species:\n")
-sns.boxplot(x='species', y='sepal_length', data=df)
-plt.title('Sepal Length Distribution across Species')
-plt.show()
+    # Wait for a key press and close the image window
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
